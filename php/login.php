@@ -61,10 +61,6 @@
                 <input type="password" name="password" class="form-control"/>
             </div>
             <div class="form-group">
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control"/>
-            </div>
-            <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
