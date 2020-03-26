@@ -6,9 +6,9 @@
     session_start();
     require_once 'config.php';
 
-    // if(!isset($_SESSION['user'])) {
-    //     header('Location: register.php');
-    // }
+    if(isset($_SESSION['user'])) {
+        header('Location: login.php');
+    }
 
     if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];

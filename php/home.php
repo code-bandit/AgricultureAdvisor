@@ -1,4 +1,8 @@
 <?php
+    /*
+        Home Page
+    */
+
     session_start();
     require_once "config.php";
 ?>
@@ -9,7 +13,7 @@
 <head>
     
     <title>Home</title> 
-    <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,8 +28,15 @@
 
     <?php include "header.php"?>
 
-    <div class="container">
-        
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 no-float bg-primary">
+                New Technologies in Agriculture
+            </div>
+            <div class="col-md-4 no-float bg-danger">  
+                News about agriculture growth
+            </div>
+        </div>
     </div>
 
 

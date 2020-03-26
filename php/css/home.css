@@ -1,0 +1,13 @@
+html,body,.container-fluid {
+    height:100%;
+}
+
+.row {
+    height: 100%;
+    display: table-row;
+}
+
+.row .no-float {
+  display: table-cell;
+  float: none;
+}
