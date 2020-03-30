@@ -1,6 +1,6 @@
 <?php
     /*
-        Home Page
+        Index Page
     */
 
     session_start();
@@ -11,8 +11,8 @@
 <html lang="en">
 <head>
 
-    <title>Home Page</title> 
-    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <title>Index Page</title> 
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,8 @@
             <div class="col-sm-4">
                 <h2>About Me</h2>
                 <div class="fakeimgAboutme"></div>
-                <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+                <br>
+                <p>IIT Ropar is a leading Institute in agriculture related researches..</p>
                 <h3>Some Links</h3>
                 <p>Lorem ipsum dolor sit ame.</p>
                 <ul class="nav nav-pills flex-column">

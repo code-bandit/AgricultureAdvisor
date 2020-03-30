@@ -49,7 +49,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
 </head>
 <body>
+    <!-- Header for page -->
     <?php include "header.php"?>
+
+    <!-- Form for login -->
     <div class="wrapper">
         <h2>Login</h2>
         <p>Please fill this form to create an account.</p>
@@ -69,5 +72,8 @@
             <p>Don't have an account? <a href="signup.php">Sign Up here</a>.</p>
         </form>
     </div>    
+
+    <script src="js/header.js"></script>
+    
 </body>
 </html>

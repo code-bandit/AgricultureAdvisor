@@ -34,8 +34,10 @@
 </head>
 <body>
     
+    <!-- Header for page -->
     <?php include "header.php"?>
 
+    <!-- Form for signup -->
     <div class="wrapper">
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
@@ -59,5 +61,8 @@
             <p>Already have an account? <a href="login.php">Login here</a>.</p>
         </form>
     </div>    
+    
+    <script src="js/header.js"></script>
+    
 </body>
 </html>
