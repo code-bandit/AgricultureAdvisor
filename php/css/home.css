@@ -11,3 +11,72 @@ html,body,.container-fluid {
   display: table-cell;
   float: none;
 }
+
+footer {
+  background-color: #d9e3db;
+  font-size: .9em;
+  text-align: center;
+  height: 45px;
+  position: relative;
+  padding: 16px;
+  box-sizing: border-box;
+  margin-top: 130px;
+}
+
+footer p {
+  color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  position: relative;
+  margin-bottom: 0;
+  font-size: .85em;
+}
+
+footer span {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: .8em;
+  color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+footer::before {
+  bottom: 5px;
+}
+
+footer::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  background-image: url(../images/tree_footer_left.svg);
+  width: 25%;
+  max-width: 146px;
+  height: 140px;
+  bottom: -3px;
+  background-repeat: no-repeat;
+  background-size: 125% 140px;
+  background-position-x: right;
+  background-position-y: bottom;
+}
+
+footer::after {
+  bottom: 5px;
+}
+
+footer::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  background-image: url(../images/tree_footer_right.svg);
+  width: 25%;
+  max-width: 146px;
+  height: 140px;
+  bottom: -3px;
+  background-repeat: no-repeat;
+  background-size: 125% 140px;
+  background-position-x: left;
+  background-position-y: bottom;
+}

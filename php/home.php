@@ -38,7 +38,10 @@
             </div>
         </div>
     </div>
-
+    <footer>
+        <p>© IIT Ropar Agriculture Advisor</p>
+        <span>Site design by <a href="http://iitrpr.ac.in/" target="_blank">IIT Ropar</a></span>
+    </footer>
 
 </body>
 
