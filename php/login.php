@@ -10,7 +10,8 @@
         header('Location: home.php');
     }
 	
-	$admin = 'admin';
+    $admin = 'admin';
+    $loginSuccess = true;
 
     if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
@@ -24,7 +25,7 @@
         // echo $result;
 
         if($row[1] != $username or $row[2] != $password){
-            echo "fail";
+            $loginSuccess = false;
         } else{
 			$_SESSION['user'] = $row[0];
             if($username == $admin){
@@ -53,9 +54,17 @@
     <?php include "header.php"?>
 
     <!-- Form for login -->
-    <div class="wrapper">
+    <div class="wrapper mr-auto">
         <h2>Login</h2>
         <p>Please fill this form to create an account.</p>
+        <?php
+            if(!$loginSuccess) {
+                $htmlCode = <<<eod
+                    <h4 style="color: red;">Username or Password Wrong</h4>
+eod;
+                echo $htmlCode;
+            }
+        ?>
         <form method="post">
             <div class="form-group">
                 <label>Username</label>
