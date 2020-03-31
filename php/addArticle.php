@@ -69,7 +69,7 @@ eod;
                         <a class="nav-link active" href="addArticle.php">Add Article</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">LoginIn/Signup</a>
+                        <a class="nav-link" href="login.php">LogIn/Signup</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Disabled</a>
