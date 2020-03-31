@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="navbar">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" id="navbar">
     <a class="navbar-brand" href="#" style="font-family: georgia,garamond,serif;font-size:16px;font-style:italic;">Agriculture Advisor</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>

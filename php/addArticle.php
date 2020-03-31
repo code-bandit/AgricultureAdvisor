@@ -5,14 +5,17 @@
 
     session_start();
     require_once "config.php";
+
+    // Receive from form  and update database
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-    <title>Index Page</title> 
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>Add Article</title> 
+    <link rel="stylesheet" type="text/css" href="css/addArticle.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,14 +32,14 @@
 </head>
 <body>
     
-    <div class="jumbotron text-center" style="margin-bottom:0">
+    <!-- <div class="jumbotron text-center" style="margin-bottom:0">
         <h1>Agriculture Advisor</h1>
         <p>Made By students of IIT Ropar</p> 
-    </div>
+    </div> -->
     
     <?php include "header.php"?>
     
-    <div class="container" style="margin-top:100px">
+    <div class="container" style="margin-top:40px">
         <div class="row">
             <div class="col-sm-4" id="sidemenu">
                 <h2>About Me</h2>
@@ -49,11 +52,11 @@
                     <li class="nav-item">
                         <?php
                             $htmlCode1 = <<<eod
-                                <a class="nav-link active" href="home.php">Home</a>
+                                <a class="nav-link" href="home.php">Home</a>
 eod;
 
                             $htmlCode2 = <<<eod
-                                <a class="nav-link active" href="index.php">Home</a>
+                                <a class="nav-link" href="index.php">Home</a>
 eod;
                             if($_SESSION['user']) {
                                 echo $htmlCode1;
@@ -63,7 +66,7 @@ eod;
                         ?>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="addArticle.php">Add Article</a>
+                        <a class="nav-link active" href="addArticle.php">Add Article</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login.php">LoginIn/Signup</a>
@@ -75,18 +78,31 @@ eod;
                 <hr class="d-sm-none">
             </div>
             <div class="col-sm-8">
-                <h2>TITLE HEADING</h2>
-                <h5>Title description, Dec 7, 2017</h5>
-                <div class="fakeimg">Fake Image</div>
-                <p>Some text..</p>
-                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                <br>
-                <h2>TITLE HEADING</h2>
-                <h5>Title description, Sep 2, 2017</h5>
-                <div class="fakeimg">Fake Image</div>
-                <p>Some text..</p>
-                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-           </div>
+                <h1>Add Article</h1>
+                <form method="post">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" class="form-control">
+                    </div>    
+                    <div class="form-group">
+                        <label>Source Link</label>
+                        <input type="link" name="srcLink" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" name="srcLink" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="link" name="srcLink" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="reset" class="btn btn-default" value="Reset">
+                    </div>
+                    <p>Don't have an account? <a href="signup.php">Sign Up here</a>.</p>
+                </form>
+            </div>
         </div>
     </div>
     
@@ -94,8 +110,7 @@ eod;
         <p>© IIT Ropar Agriculture Advisor</p>
     </footer>
     
-    <!-- <script type="text/javascript" src="js/index.js"></script> -->
-    <script type="text/javascript" src="js/header.js"></script>
+    <!-- <script type="text/javascript" src="js/header.js"></script> -->
     
 </body>
 </html>
