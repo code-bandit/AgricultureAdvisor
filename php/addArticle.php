@@ -7,6 +7,20 @@
     require_once "config.php";
 
     // Receive from form  and update database
+    if(isset($_POST['title']) && isset($_POST['srcLink'])) {
+        $title = $_POST['title'];
+        $srcLink = $_POST['srcLink'];
+        $image = $_POST['img'];
+        $description = $_POST['description'];
+
+        $query = "INSERT INTO articles(id, title, srcLink, img, description) values(default, '$title', '$srcLink', '$image', '$description')";
+        pg_query($conn, $query);
+        if(isset($_SESSION['user'])) {
+            header("Location: home.php");
+        }else {
+            header("Location: index.php");
+        }
+    }
 
 ?>
 
@@ -58,7 +72,7 @@ eod;
                             $htmlCode2 = <<<eod
                                 <a class="nav-link" href="index.php">Home</a>
 eod;
-                            if($_SESSION['user']) {
+                            if(isset($_SESSION['user'])) {
                                 echo $htmlCode1;
                             }else {
                                 echo $htmlCode2;
@@ -90,11 +104,11 @@ eod;
                     </div>
                     <div class="form-group">
                         <label>Image</label>
-                        <input type="file" name="srcLink" class="form-control"/>
+                        <input type="file" name="img" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <input type="link" name="srcLink" class="form-control"/>
+                        <input type="link" name="description" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Submit">

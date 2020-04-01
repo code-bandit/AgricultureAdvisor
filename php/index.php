@@ -55,7 +55,7 @@ eod;
                             $htmlCode2 = <<<eod
                                 <a class="nav-link active" href="index.php">Home</a>
 eod;
-                            if($_SESSION['user']) {
+                            if(isset($_SESSION['user'])) {
                                 echo $htmlCode1;
                             }else {
                                 echo $htmlCode2;

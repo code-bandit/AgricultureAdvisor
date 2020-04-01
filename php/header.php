@@ -14,7 +14,7 @@ eod;
                 $htmlCode2 = <<<eod
                     <a class="nav-link" href="index.php">Home</a>
 eod;
-                if($_SESSION['user']) {
+                if(isset($_SESSION['user'])) {
                     echo $htmlCode1;
                 }else {
                     echo $htmlCode2;
@@ -25,7 +25,7 @@ eod;
             <a class="nav-link" href="#">About Us</a>
         </li>
         <?php
-                if($_SESSION['user']){
+                if(isset($_SESSION['user'])){
                     echo '<li class="nav-item active"><a href="logout.php" class="nav-link">'.'LogOut'.'</a></li>';
                 }else{
                     echo '<li class="nav-item active"><a href="login.php" class="nav-link">'.'LogIn / SignUp'.'</a></li>';
@@ -42,7 +42,7 @@ eod;
             <button class="btn btn-success" type="submit">Search</button>
             </form>
 eod;
-        if($_SESSION['user']) {
+        if(isset($_SESSION['user'])) {
             echo $htmlCode;
         }else {
             echo $htmlCode;
