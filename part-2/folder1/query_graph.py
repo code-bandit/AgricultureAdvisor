@@ -10,62 +10,53 @@ from py2neo import Graph
 #graph = Graph("bolt://127.0.0.1:7687", auth=('neo4j', 'neo4j'))
 graph = Graph("bolt://localhost:7687", auth=('neo4j', 'saisantosh'))
 
-#####################################################################
-# Utility functions to talk to our knowledge graph
-#####################################################################
-
-#def get_person_by_id(p_id):
-query = '''
-        MATCH (n:Person {uid: {id}})
-        RETURN n as person
-    '''
-    # Use evaluate() if a single record is expected &
-    # use run()if multiple records are expected
-result = graph.run(query, parameters={'id': 33}).data()
-if len(result) == 0 :
-	print('Hi')
-else :
-	print (result[0]['person'])
-
-
-def relation_of_person_by_id(p_id):
-    query = '''
-        MATCH (n:Person {uid: {id}})-[r]->(c)
-        RETURN n as person,type(r) as relation_name, c as value
-    '''
-    result = graph.run(query, parameters={'id': p_id}).data()
-
-    if len(result) == 0 :
-        return {}
-    else :
-        person = result[0]["person"]
-        person["work_industry"] = [row["value"]["name"] for row in result if row["relation_name"] == "WORKS_IN_INDUSTRY" ]
-        person["majored"] = [row["value"]["name"] for row in result if row["relation_name"] == "MAJORED_IN" ]
-        person["country"] = [row["value"]["name"] for row in result if row["relation_name"] == "LIVES_IN" ]
-        return person
-
-
-def get_all_count():
-    query = '''
-        MATCH (n:Person)
-        WITH count(n) as count
-        RETURN 'Person' as NodeType, count
-        UNION ALL
-        MATCH (n:Country)
-        WITH count(n) as count
-        RETURN 'Country' as NodeType, count
-        UNION ALL
-        MATCH (n:WorkType)
-        WITH count(n) as count
-        RETURN 'WorkType' as NodeType, count
-        UNION ALL
-        MATCH (n:MajorStream)
-        WITH count(n) as count
-        RETURN 'MajorStream' as NodeType, count
-    '''
-
-    return graph.run(query).data()
 
 
 
 
+
+query='''
+	MATCH (a:Crop{name:{crop_name}})
+	RETURN a.name
+	'''
+cursor = graph.run(query, parameters={'crop_name': 'paddy'}).evaluate()
+
+print(cursor)
+
+print("Getting states where the crop grown:")
+
+query=''' MATCH(a: Crop{name:{crop_name}}) -[:MAJORLY_GROWN_IN]->(b:state)
+		RETURN b.name  '''
+cursor= graph.run(query, parameters={'crop_name': 'paddy'}).evaluate()
+print(cursor)
+
+print("Getting diseases that can occur:")
+
+query=''' MATCH(a: Crop{name:{crop_name}}) -[:DISEASES_MAY_OCCUR]->(b:disease_may_occur)
+		RETURN b.name  '''
+cursor = graph.run(query, parameters={'crop_name': 'paddy'}).evaluate()
+print(cursor)
+
+print("Getting ph of soil that is sutibale for growing:")
+query=''' MATCH(a: Crop{name:{crop_name}}) -[:SUITABLE_SOIL_PH]->(b:suitable_soil_ph)
+		RETURN b.name  '''
+cursor= graph.run(query, parameters={'crop_name': 'paddy'}).evaluate()
+print(cursor)
+
+print("Getting required equipments for given soil:")
+query=''' MATCH(a: Crop{name:{crop_name}}) -[:EQUIPMENT_REQUIRED]->(b:required_equipment)
+		RETURN b.name  '''
+cursor = graph.run(query, parameters={'crop_name': 'paddy'}).evaluate()
+print(cursor)
+
+print("Getting fertilizers required:")
+query=''' MATCH(a: Crop{name:{crop_name}}) -[:FERTILIZERS_REQUIRED]->(b:required_fertilizers)
+		RETURN b.name  '''
+cursor = graph.run(query, parameters={'crop_name': 'paddy'}).evaluate()
+print(cursor)
+
+print("Getting required soil type:")
+query=''' MATCH(a: Crop{name:{crop_name}}) -[:SUITABLE_SOIL_TYPE]->(b:soiltype)
+		RETURN b.name  '''
+cursor = graph.run(query, parameters={'crop_name': 'paddy'}).evaluate()
+print(cursor)
