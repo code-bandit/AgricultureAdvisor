@@ -19,8 +19,6 @@ graph.run("CREATE CONSTRAINT ON (m:suitable_soil_ph) ASSERT m.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:required_equipment) ASSERT p.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:required_fertilizers) ASSERT p.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:disease_may_occur) ASSERT p.name IS UNIQUE;")
-
-
 def read_data():
     data = pd.read_csv(
 
@@ -84,6 +82,60 @@ def process_soil_type_data(data):
     run_neo_query(soil_data,query)
 
 
+
+def process_ph_type_data(data):
+    soil_data = data[['cropname', 'ph']]
+    soil_data = soil_data.dropna()
+    soil_data = list(soil_data.T.to_dict().values())
+
+    query = """
+            UNWIND {rows} AS row
+            MERGE (crop:Crop {name:row.cropname})
+            MERGE (sr:suitable_soil_ph {name:row.ph})
+            MERGE (crop)-[:SUITABLE_SOIL_PH]->(sr)
+        """
+    run_neo_query(soil_data,query)
+    
+    
+def process_equipment_type_data(data):
+    soil_data = data[['cropname', 'equipment']]
+    soil_data = soil_data.dropna()
+    soil_data = list(soil_data.T.to_dict().values())
+
+    query = """
+            UNWIND {rows} AS row
+            MERGE (crop:Crop {name:row.cropname})
+            MERGE (sr:required_equipment {name:row.equipment})
+            MERGE (crop)-[:EQUIPMENT_REQUIRED]->(sr)
+        """
+    run_neo_query(soil_data,query)
+    
+def process_fertilizer_type_data(data):
+    soil_data = data[['cropname', 'fertilizers']]
+    soil_data = soil_data.dropna()
+    soil_data = list(soil_data.T.to_dict().values())
+
+    query = """
+            UNWIND {rows} AS row
+            MERGE (crop:Crop {name:row.cropname})
+            MERGE (sr:required_fertilizers {name:row.fertilizers})
+            MERGE (crop)-[:FERTILIZERS_REQUIRED]->(sr)
+        """
+    run_neo_query(soil_data,query)
+def process_disease_type_data(data):
+    soil_data = data[['cropname', 'diseases']]
+    soil_data = soil_data.dropna()
+    soil_data = list(soil_data.T.to_dict().values())
+
+    query = """
+            UNWIND {rows} AS row
+            MERGE (crop:Crop {name:row.cropname})
+            MERGE (sr:disease_may_occur {name:row.diseases})
+            MERGE (crop)-[:DISEASES_MAY_OCCUR]->(sr)
+        """
+    run_neo_query(soil_data,query)
+
+
 # def process_dev_data(data):
 #     dev_data = data[['Respondent', 'DevType']]
 #     dev_data = dev_data.dropna()
@@ -125,4 +177,8 @@ if __name__== "__main__":
     process_crop_data(data)
     process_statewise_data(data)
     process_soil_type_data(data)
+    process_ph_type_data(data)
+    process_equipment_type_data(data)
+    process_fertilizer_type_data(data)
+    process_disease_type_data(data)
     # process_dev_data(data)
