@@ -12,7 +12,7 @@
 <head>
 
     <title>Home Page</title> 
-    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,21 +38,46 @@
     
     <div class="container" style="margin-top:100px">
         <div class="row">
-            <div class="col-sm-4">
-                <h2>About Me</h2>
+            <div class="col-sm-4" id="sidemenu">
+                <?php
+                    $userId = $_SESSION['user'];
+                    $query = "SELECT * FROM users WHERE users.id = '$userId'";
+                    $row = pg_fetch_row(pg_query($conn, $query));
+                    $htmlCode = <<<eod
+                                    <h2> Welcome $row[1] </h2>
+eod;
+                    echo $htmlCode;
+                ?>
                 <div class="fakeimgAboutme"></div>
-                <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+                <br>
+                <p>IIT Ropar is a leading Institute in agriculture related researches..</p>
                 <h3>Some Links</h3>
                 <p>Lorem ipsum dolor sit ame.</p>
-                <ul class="nav nav-pills flex-column">
+                <ul class="nav nav-pills flex-column" id="linksIndexPage">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
+                        <?php
+                            $htmlCode1 = <<<eod
+                                <a class="nav-link active" href="home.php">Home</a>
+eod;
+
+                            $htmlCode2 = <<<eod
+                                <a class="nav-link active" href="index.php">Home</a>
+eod;
+                            if(isset($_SESSION['user'])) {
+                                echo $htmlCode1;
+                            }else {
+                                echo $htmlCode2;
+                            }
+                        ?>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="editProfile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="addArticle.php">Add Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">LogIn/Signup</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Disabled</a>
@@ -72,7 +97,7 @@
                 <div class="fakeimg">Fake Image</div>
                 <p>Some text..</p>
                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-            </div>
+           </div>
         </div>
     </div>
     
@@ -80,7 +105,8 @@
         <p>© IIT Ropar Agriculture Advisor</p>
     </footer>
     
-    <script src="js/header.js"></script>
-
+    <!-- <script type="text/javascript" src="js/index.js"></script> -->
+    <script type="text/javascript" src="js/header.js"></script>
+    
 </body>
 </html>

@@ -7,20 +7,30 @@
     require_once "config.php";
 
     // Receive from form  and update database
-    if(isset($_POST['title']) && isset($_POST['srcLink'])) {
-        $title = $_POST['title'];
-        $srcLink = $_POST['srcLink'];
-        $image = $_POST['img'];
-        $description = $_POST['description'];
-
-        $query = "INSERT INTO articles(id, title, srcLink, img, description) values(default, '$title', '$srcLink', '$image', '$description')";
-        pg_query($conn, $query);
-        if(isset($_SESSION['user'])) {
-            header("Location: home.php");
-        }else {
-            header("Location: index.php");
+    $soilTypeMentioned = true;
+    $weatherMentioned = true;
+    
+    if(isset($_POST['soilType']) || isset($_POST['weather'])) {
+        if(isset($_POST['soilType'])) {
+            $soilTypeMentioned = false;
+        }
+        if($_POST['weather'] == "blank") {
+            $weatherMentioned = false;
+        }
+        if(!$soilTypeMentioned && $weatherMentioned){
+            $soilType = $_POST['soilType'];
+            $soilPh = $_POST['soilPh'];
+            $state = $_POST['state'];
+            $district = $_POST['district'];
+            $village = $_POST['village'];
+            $weather = $_POST['weather'];
+            $username = $_SESSION['user'];
+            $query = "INSERT INTO profileUser(id, soilType, soilPh, state, district, village, weather) values('$username', '$soilType', '$soilPh', '$state', '$district', '$village', '$weather')";
+            pg_query($conn, $query);
+            header('Location: home.php');
         }
     }
+
 
 ?>
 
@@ -83,7 +93,7 @@ eod;
                         <a class="nav-link active" href="editProfile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="addArticle.php">Add Article</a>
+                        <a class="nav-link" href="addArticle.php">Add Article</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login.php">LogIn/Signup</a>
@@ -95,23 +105,61 @@ eod;
                 <hr class="d-sm-none">
             </div>
             <div class="col-sm-8">
-                <h1>Add Article</h1>
+                <h1>Edit Profile</h1>
                 <form method="post">
                     <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="title" class="form-control">
+                        <?php
+                            $htmlCode1 = <<<eod
+                                <label>Soil Type *</label>
+eod;
+                            $htmlCode2 = <<<eod
+                                <label style="color: red;">Soil Type *</label>
+eod;
+                            if(!$soilTypeMentioned) {
+                                echo $htmlCode2;
+                            }else {
+                                echo  $htmlCode1;
+                            }
+                        ?>
+                        <input type="text" name="soilType" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Soil Ph</label>
+                        <input type="text" name="soilPh" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="text" name="state" class="form-control">
                     </div>    
                     <div class="form-group">
-                        <label>Source Link</label>
-                        <input type="link" name="srcLink" class="form-control"/>
-                    </div>
+                        <label>Village</label>
+                        <input type="text" name="village" class="form-control">
+                    </div>    
                     <div class="form-group">
-                        <label>Image</label>
-                        <input type="file" name="img" class="form-control"/>
-                    </div>
+                        <label>District</label>
+                        <input type="text" name="district" class="form-control">
+                    </div>    
                     <div class="form-group">
-                        <label>Description</label>
-                        <input type="link" name="description" class="form-control"/>
+                        <?php
+                            $htmlCode1 = <<<eod
+                                <label>Weather *</label>
+eod;
+                            $htmlCode2 = <<<eod
+                                <label style="color: red;">Weather *</label>
+eod;
+                            if(!$weatherMentioned) {
+                                echo $htmlCode2;
+                            }else {
+                                echo  $htmlCode1;
+                            }
+                        ?>
+                        <select id="weather" name="weather" class="form-control">
+                            <option value="blank"></option>
+                            <option value="good">Good</option>
+                            <option value="hot">Hot</option>
+                            <option value="humid">Humid</option>
+                            <option value="bad">Bad</option>
+                        </select> 
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Submit">
