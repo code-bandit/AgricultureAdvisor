@@ -80,17 +80,18 @@ eod;
                         ?>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="editProfile.php">Profile</a>
+                        <a class="nav-link" href="editProfile.php">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="addArticle.php">Add Article</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">LogIn/Signup</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
+                    </li>                    
+                    <?php
+                        if(isset($_SESSION['user'])){
+                            echo '<li class="nav-item active"><a href="logout.php" class="nav-link">'.'LogOut'.'</a></li>';
+                        }else{
+                            echo '<li class="nav-item active"><a href="login.php" class="nav-link">'.'LogIn / SignUp'.'</a></li>';
+                        }
+                    ?>
                 </ul>
                 <hr class="d-sm-none">
             </div>

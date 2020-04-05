@@ -25,8 +25,17 @@
             $village = $_POST['village'];
             $weather = $_POST['weather'];
             $username = $_SESSION['user'];
-            $query = "INSERT INTO profileUser(id, soilType, soilPh, state, district, village, weather) values('$username', '$soilType', '$soilPh', '$state', '$district', '$village', '$weather')";
-            pg_query($conn, $query);
+            $query = "SELECT * FROM profileUser WHERE profileUser.id = '$username'";
+            $row = pg_fetch_row(pg_query($conn, $query));
+            if($row) {
+                $query = "DELETE FROM profileUser where profileUser.id = '$username'";
+                pg_query($conn, $query);
+                $query = "INSERT INTO profileUser(id, soilType, soilPh, state, district, village, weather) values('$username', '$soilType', '$soilPh', '$state', '$district', '$village', '$weather')";
+                pg_query($conn, $query);
+            }else {
+                $query = "INSERT INTO profileUser(id, soilType, soilPh, state, district, village, weather) values('$username', '$soilType', '$soilPh', '$state', '$district', '$village', '$weather')";
+                pg_query($conn, $query);
+            }
             header('Location: home.php');
         }
     }
@@ -95,12 +104,13 @@ eod;
                     <li class="nav-item">
                         <a class="nav-link" href="addArticle.php">Add Article</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">LogIn/Signup</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
+                    <?php
+                        if(isset($_SESSION['user'])){
+                            echo '<li class="nav-item active"><a href="logout.php" class="nav-link">'.'LogOut'.'</a></li>';
+                        }else{
+                            echo '<li class="nav-item active"><a href="login.php" class="nav-link">'.'LogIn / SignUp'.'</a></li>';
+                        }
+                    ?> 
                 </ul>
                 <hr class="d-sm-none">
             </div>
