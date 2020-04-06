@@ -132,6 +132,16 @@ g = Graph(uri = "bolt://localhost:7687",user = "neo4j", password = "12345")
 
 from py2neo import Node, Relationship
 
+def run_neo_query(data, query):
+    batches = get_batches(data)
+
+    for index, batch in batches:
+        print('[Batch: %s] Will add %s node to Graph' % (index, len(batch)))
+        g.run(query, rows=batch)
+
+
+def get_batches(lst, batch_size=100):
+    return [(i, lst[i:i + batch_size]) for i in range(0, len(lst), batch_size)]
 
 g.delete_all()
 
@@ -139,27 +149,23 @@ print(len(g.nodes))
 print(len(g.relationships))
 
 
-tx = g.begin()
-for i in kg_df.index:
+user_data = kg_df[['source', 'target', 'edge']]
+user_data =  user_data.dropna()
+user_data = list(user_data.T.to_dict().values())
 
-    
 
-  # begin a transaction
-  
+query = """
+            UNWIND {rows} AS row
+            MERGE (object1:Object {name:row.source})
+            MERGE (object2:Object {name:row.target})
+            MERGE (object1)-[:REL{type:row.edge}]->(object2)
+        """
 
-  # define some nodes and relationships
-  a = Node("Object", name=kg_df['source'][i])
-  b = Node("Object", name=kg_df['target'][i])
-  ab = Relationship(a, kg_df['edge'][i], b)
+run_neo_query(user_data,query)
 
-  # create the nodes and relationships
-  tx.create(a)
-  tx.create(b)
-  tx.create(ab)
 
-  # commit the transaction
- 
-tx.commit()
-print(g.exists(ab))
+
+
+#print(g.exists(ab))
 print(len(g.nodes))
 print(len(g.relationships))
