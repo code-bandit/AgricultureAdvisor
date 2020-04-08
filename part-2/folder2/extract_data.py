@@ -2,16 +2,10 @@ import pandas as pd
 from py2neo import Graph
 
 
-#####################################################################
-# Graph database config
-#####################################################################
 
-# Set up a link to the local graph database.
-# Ideally get password from ENV variable
-# graph = Graph(getenv("NEO4J_URL"), auth=(getenv("NEO4J_UID"), getenv("NEO4J_PASSWORD")))
-graph = Graph("bolt://localhost:7687", auth=('neo4j', 'saisantosh'))
+graph = Graph("bolt://localhost:7687", auth=('neo4j', 'abc'))
 
-# Add uniqueness constraints.
+
 graph.run("CREATE CONSTRAINT ON (c:Crop) ASSERT c.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (c:state) ASSERT c.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (s:soiltype) ASSERT s.name IS UNIQUE;")
