@@ -26,9 +26,7 @@ def process_crop_data(data):
     user_data = data[['cropname','Instate', 'soilcondition', 'ph', 'equipment', 'fertilizers', 'diseases']]
     user_data =  user_data.dropna()
 
-    # Convert data frame to list of dictionaries
-    # Neo4j UNWIND query expects a list of dictionaries
-    # for bulk insertion
+   
     user_data = list(user_data.T.to_dict().values())
     print(user_data)
 
