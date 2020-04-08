@@ -92,6 +92,9 @@ eod;
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="addArticle.php">Add Article</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="recommend.php">Get Recommendation</a>
                     </li>
                     <?php
                         if(isset($_SESSION['user'])){

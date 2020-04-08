@@ -13,7 +13,7 @@
         $image = $_POST['img'];
         $description = $_POST['description'];
 
-        $query = "INSERT INTO articles(id, title, srcLink, img, description) values(default, '$title', '$srcLink', '$image', '$description')";
+        $query = "";
         pg_query($conn, $query);
         if(isset($_SESSION['user'])) {
             header("Location: home.php");
@@ -28,7 +28,7 @@
 <html lang="en">
 <head>
 
-    <title>Add Article</title> 
+    <title>Get Recommendation</title> 
     <link rel="stylesheet" type="text/css" href="css/addArticle.css">
 
     <meta charset="UTF-8">
@@ -56,7 +56,7 @@
     <div class="container" style="margin-top:40px">
         <div class="row">
             <div class="col-sm-4" id="sidemenu">
-                <?php
+            <?php
                     if(isset($_SESSION['user'])) {
                         $userId = $_SESSION['user'];
                         $query = "SELECT * FROM users WHERE users.id = '$userId'";
@@ -107,11 +107,11 @@ eod;
                         
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="addArticle.php">Add Article</a>
-                    </li>                    
+                        <a class="nav-link" href="addArticle.php">Add Article</a>
+                    </li>                                        
                     <li class="nav-item">
-                        <a class="nav-link" href="recommend.php">Get Recommendation</a>
-                    </li>                    
+                        <a class="nav-link active" href="recommend.php">Get Recommendation</a>
+                    </li>
                     <?php
                         if(isset($_SESSION['user'])){
                             echo '<li class="nav-item active"><a href="logout.php" class="nav-link">'.'LogOut'.'</a></li>';
@@ -123,29 +123,52 @@ eod;
                 <hr class="d-sm-none">
             </div>
             <div class="col-sm-8">
-                <h1>Add Article</h1>
+                <h1>Get Recommendation</h1>
                 <form method="post">
+                <div class="form-group">
+                        <label>Recommendation On</label>
+                        <select id="recomm" name="recomm" class="form-control">
+                            <option value="blank"></option>
+                            <option value="crop">Crop Recommendation</option>
+                            <option value="disease">Disease Prevention</option>
+                            <option value="tools">Tools Recommendation</option>
+                        </select> 
+                    </div>
                     <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="title" class="form-control">
+                        <label>Soil Type</label>
+                        <input type="text" name="soilType" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Soil Ph</label>
+                        <input type="text" name="soilPh" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="text" name="state" class="form-control">
                     </div>    
                     <div class="form-group">
-                        <label>Source Link</label>
-                        <input type="link" name="srcLink" class="form-control"/>
-                    </div>
+                        <label>Village</label>
+                        <input type="text" name="village" class="form-control">
+                    </div>    
                     <div class="form-group">
-                        <label>Image</label>
-                        <input type="file" name="img" class="form-control"/>
-                    </div>
+                        <label>District</label>
+                        <input type="text" name="district" class="form-control">
+                    </div>                        
                     <div class="form-group">
-                        <label>Description</label>
-                        <input type="link" name="description" class="form-control"/>
+                        <label>Weather</label>
+                        <select id="weather" name="weather" class="form-control">
+                            <option value="blank"></option>
+                            <option value="good">Good</option>
+                            <option value="hot">Hot</option>
+                            <option value="humid">Humid</option>
+                            <option value="bad">Bad</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <input type="reset" class="btn btn-default" value="Reset">
                     </div>
-                </form>
+                    </form>
             </div>
         </div>
     </div>

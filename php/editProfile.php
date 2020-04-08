@@ -75,7 +75,23 @@
     <div class="container" style="margin-top:40px">
         <div class="row">
             <div class="col-sm-4" id="sidemenu">
-                <h2>About Me</h2>
+            <?php
+                    if(isset($_SESSION['user'])) {
+                        $userId = $_SESSION['user'];
+                        $query = "SELECT * FROM users WHERE users.id = '$userId'";
+                        $row = pg_fetch_row(pg_query($conn, $query));
+                        $row[1] = strtoupper($row[1]);
+                        $htmlCode = <<<eod
+                                        <h3> Welcome $row[1] </h3>
+eod;
+                        echo $htmlCode;
+                    }else {
+                        $htmlCode = <<<eod
+                                         <h2>About IIT ROPAR</h2>
+eod;
+                        echo $htmlCode;
+                    }
+                ?>
                 <div class="fakeimgAboutme"></div>
                 <br>
                 <p>IIT Ropar is a leading Institute in agriculture related researches..</p>
@@ -103,6 +119,9 @@ eod;
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="addArticle.php">Add Article</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="recommend.php">Get Recommendation</a>
                     </li>
                     <?php
                         if(isset($_SESSION['user'])){
@@ -175,7 +194,6 @@ eod;
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <input type="reset" class="btn btn-default" value="Reset">
                     </div>
-                    <p>Don't have an account? <a href="signup.php">Sign Up here</a>.</p>
                 </form>
             </div>
         </div>

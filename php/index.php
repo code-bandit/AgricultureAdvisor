@@ -39,7 +39,7 @@
     <div class="container" style="margin-top:100px">
         <div class="row">
             <div class="col-sm-4" id="sidemenu">
-                <h2>About Me</h2>
+                <h2>About IIT ROPAR</h2>
                 <div class="fakeimgAboutme"></div>
                 <br>
                 <p>IIT Ropar is a leading Institute in agriculture related researches..</p>
@@ -63,6 +63,9 @@ eod;
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="addArticle.php">Add Article</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="recommend.php">Get Recommendation</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login.php">LogIn/Signup</a>
