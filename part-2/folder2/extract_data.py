@@ -12,10 +12,10 @@ graph.run("CREATE CONSTRAINT ON (m:suitable_soil_ph) ASSERT m.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:required_equipment) ASSERT p.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:required_fertilizers) ASSERT p.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:disease_may_occur) ASSERT p.name IS UNIQUE;")
-def process_crop_data(user_data):
+def process_crop_data(crop_data):
     
     # Neo4j UNWIND query expects a list of dictionaries
-    print(user_data)
+    
 
     query = """
             UNWIND {rows} AS row
@@ -30,7 +30,7 @@ def process_crop_data(user_data):
                 crop1.diseases = row.diseases
         """
 
-    run_neo_query(user_data,query)
+    run_neo_query(crop_data,query)
 
 
 def process_statewise_data(state_data):
