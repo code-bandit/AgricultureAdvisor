@@ -1,4 +1,5 @@
 from py2neo import Graph
+#connection to Neo4j
 graph = Graph("bolt://localhost:7687", auth=('neo4j', 'abc'))
 query='''
 	MATCH (a:Crop{name:{crop_name}})
