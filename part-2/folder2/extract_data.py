@@ -142,7 +142,7 @@ if __name__== "__main__":
                 this_dict["soilcondition"]=row[3]
                 l.append(this_dict)
             line_count+=1
-        # print(l)
+        # print(l)#sending data required for insertion into graph crop details
         process_soil_type_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -157,7 +157,7 @@ if __name__== "__main__":
                 this_dict["ph"]=row[4]
                 l.append(this_dict)
             line_count+=1
-        # print(l)
+        # print(l)#sending data required for insertion into graph crop details
         process_ph_type_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -172,7 +172,7 @@ if __name__== "__main__":
                 this_dict["equipment"]=row[6]
                 l.append(this_dict)
             line_count+=1
-        # print(l)
+        # print(l)#sending data required for insertion into graph crop details
         process_equipment_type_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -187,7 +187,7 @@ if __name__== "__main__":
                 this_dict["fertilizers"]=row[7]
                 l.append(this_dict)
             line_count+=1
-        # print(l)
+        # print(l)#sending data required for insertion into graph crop details
         process_fertilizer_type_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -202,5 +202,5 @@ if __name__== "__main__":
                 this_dict["diseases"]=row[8]
                 l.append(this_dict)
             line_count+=1
-        # print(l)
+        # print(l)#sending data required for insertion into graph crop details
         process_disease_type_data(l)
