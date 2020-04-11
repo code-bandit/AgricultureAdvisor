@@ -94,16 +94,7 @@ def process_disease_type_data(diseases_data):
 
 
 def run_neo_query(data, query):
-    batches = get_batches(data)
-
-    for index, batch in batches:
-        print('[Batch: %s] Will add %s node to Graph' % (index, len(batch)))
-        graph.run(query, rows=batch)
-
-
-def get_batches(lst, batch_size=100):
-    return [(i, lst[i:i + batch_size]) for i in range(0, len(lst), batch_size)]
-
+        graph.run(query, rows=data)
 
 if __name__== "__main__":
     l=[]
@@ -126,7 +117,7 @@ if __name__== "__main__":
     			this_dict["diseases"]=row[8]
     			l.append(this_dict)
     		line_count+=1
-    	print(l)
+    	# print(l)
     	process_crop_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -141,7 +132,7 @@ if __name__== "__main__":
                 this_dict["Instate"]=row[1]
                 l.append(this_dict)
             line_count+=1
-        print(l)
+        # print(l)
         process_statewise_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -156,7 +147,7 @@ if __name__== "__main__":
                 this_dict["soilcondition"]=row[3]
                 l.append(this_dict)
             line_count+=1
-        print(l)
+        # print(l)
         process_soil_type_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -171,7 +162,7 @@ if __name__== "__main__":
                 this_dict["ph"]=row[4]
                 l.append(this_dict)
             line_count+=1
-        print(l)
+        # print(l)
         process_ph_type_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -186,7 +177,7 @@ if __name__== "__main__":
                 this_dict["equipment"]=row[6]
                 l.append(this_dict)
             line_count+=1
-        print(l)
+        # print(l)
         process_equipment_type_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -201,7 +192,7 @@ if __name__== "__main__":
                 this_dict["fertilizers"]=row[7]
                 l.append(this_dict)
             line_count+=1
-        print(l)
+        # print(l)
         process_fertilizer_type_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
@@ -216,5 +207,5 @@ if __name__== "__main__":
                 this_dict["diseases"]=row[8]
                 l.append(this_dict)
             line_count+=1
-        print(l)
+        # print(l)
         process_disease_type_data(l)
