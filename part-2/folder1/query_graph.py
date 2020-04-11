@@ -1,7 +1,14 @@
 from py2neo import Graph
 
+#####################################################################
+# Graph database config
+#####################################################################
 
-graph = Graph("bolt://localhost:7687", auth=('neo4j', 'abc'))
+# Set up a link to the local graph database.
+# Ideally get password from ENV variable
+# graph = Graph(getenv("NEO4J_URL"), auth=(getenv("NEO4J_UID"), getenv("NEO4J_PASSWORD")))
+#graph = Graph("bolt://127.0.0.1:7687", auth=('neo4j', 'neo4j'))
+graph = Graph("bolt://localhost:7687", auth=('neo4j', 'saisantosh'))
 
 
 

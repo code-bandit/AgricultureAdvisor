@@ -1,0 +1,5 @@
+cropname,Instate,attemp,soilcondition,ph,weather,equipment,fertilizers,diseases
+paddy,west bengal,20 to 27 degrees centigrade, Loam;slit;gravel;clayey,6,"good rainfall,monthly rainfall of 100-200 mm is a must .",Tractor,"a,b","Rice Blast,Brown Spot of Rice,Sheath rot of Rice."
+potato,Himachal Pradesh; Punjab; Uttar Pradesh; Madhya Pradesh; Gujarat; Maharashtra; Karnataka; West Bengal; Bihar ; Assam,15 to 20,Well-drained;light; deep; loose soil; high in organic matter,4.8 to 5.5,"cold to mild lower temperatures,",haulm topper,"b,c","Bacterial wilt,Septoria leaf spot,Late blight,Early blight."
+wheat,Uttar Pradesh; Punjab; Haryana; Madhya Pradesh; Rajasthan; Bihar ; Gujarat.,21° to 24° C but not too hot. ,Loam soil ,"A soil pH between 6.0 and 7.0, with a target pH of 6.4",Wheat needs 12 to 15 inches (31 to 38 centimeters) of water to produce a good crop. It grows best when temperatures are warm,plough,"a,b,c",Powdery mildew
+tomato,Andhra Pradesh ;Telangana,21 to 27 degree centigrade,loam soil ;sandy loam,7,"temperatures are warm, ",Areas with low humidity,d,Early Blight.
