@@ -1,7 +1,7 @@
 from py2neo import Graph
 import csv
 
-#Setting up connection to local graph database
+#Connection to graph database
 graph = Graph("bolt://localhost:7687", auth=('neo4j', 'abc'))
 
 # Adding uniqueness constraints.
@@ -12,27 +12,17 @@ graph.run("CREATE CONSTRAINT ON (m:suitable_soil_ph) ASSERT m.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:required_equipment) ASSERT p.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:required_fertilizers) ASSERT p.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (p:disease_may_occur) ASSERT p.name IS UNIQUE;")
+#Neo4j query for constructing node for crops
 def process_crop_data(crop_data):
-    
-    # Neo4j UNWIND query expects a list of dictionaries
-    
-
     query = """
             UNWIND {rows} AS row
 
             MERGE (crop1:Crop {name:row.cropname})
-            ON CREATE SET 
-                crop1.Instate = row.Instate,
-                crop1.soilcondition = row.soilcondition,
-                crop1.ph = row.ph,
-                crop1.equipment = row.equipment,
-                crop1.fertilizers = row.fertilizers,
-                crop1.diseases = row.diseases
         """
 
     run_neo_query(crop_data,query)
 
-
+#Neo4j query for constructing node state of a state if not present and adding the relation bewteeb state annd crop
 def process_statewise_data(state_data):
     query = """
            UNWIND {rows} AS row
@@ -42,7 +32,7 @@ def process_statewise_data(state_data):
        """
     run_neo_query(state_data,query)
 
-
+#Neo4j query for constructing node soil type and adding the relation between  crop and soil
 def process_soil_type_data(soil_data):
     query = """
             UNWIND {rows} AS row
@@ -53,7 +43,7 @@ def process_soil_type_data(soil_data):
     run_neo_query(soil_data,query)
 
 
-
+#Neo4j query for constructing node ph and adding the relation between  ph  and crop
 def process_ph_type_data(ph_data):
     query = """
             UNWIND {rows} AS row
@@ -63,6 +53,7 @@ def process_ph_type_data(ph_data):
         """
     run_neo_query(ph_data,query)
     
+#Neo4j query for constructing node equipment and relation between  crop and equipment
     
 def process_equipment_type_data(equipment_data):
     query = """
@@ -72,7 +63,8 @@ def process_equipment_type_data(equipment_data):
             MERGE (crop)-[:EQUIPMENT_REQUIRED]->(sr)
         """
     run_neo_query(equipment_data,query)
-    
+
+#Neo4j query for constructing node fertilizer and creating relation between fertilizer and crop
 def process_fertilizer_type_data(fertilizers_data):
 
     query = """
@@ -82,6 +74,7 @@ def process_fertilizer_type_data(fertilizers_data):
             MERGE (crop)-[:FERTILIZERS_REQUIRED]->(sr)
         """
     run_neo_query(fertilizers_data,query)
+#Neo4j query for constructing node diseases and creating relation between disease and crop
 def process_disease_type_data(diseases_data):
 
     query = """
@@ -92,7 +85,7 @@ def process_disease_type_data(diseases_data):
         """
     run_neo_query(diseases_data,query)
 
-
+#running Neo4j query
 def run_neo_query(data, query):
         graph.run(query, rows=data)
 
@@ -118,6 +111,8 @@ if __name__== "__main__":
     			l.append(this_dict)
     		line_count+=1
     	# print(l)
+        #sending data required for insertion into graph crop details
+             
     	process_crop_data(l)
     l=[]
     with open('survey_results_public_agri.csv') as csv_file:
