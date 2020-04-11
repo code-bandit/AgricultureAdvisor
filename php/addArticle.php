@@ -7,18 +7,29 @@
     require_once "config.php";
 
     // Receive from form  and update database
+    
+    $srcLinkBool = false;
+    $titleBool = false;
     if(isset($_POST['title']) && isset($_POST['srcLink'])) {
-        $title = $_POST['title'];
-        $srcLink = $_POST['srcLink'];
-        $image = $_POST['img'];
-        $description = $_POST['description'];
-
-        $query = "INSERT INTO articles(id, title, srcLink, img, description) values(default, '$title', '$srcLink', '$image', '$description')";
-        pg_query($conn, $query);
-        if(isset($_SESSION['user'])) {
-            header("Location: home.php");
-        }else {
-            header("Location: index.php");
+        if(empty($_POST['title'])) {
+            $titleBool = true;
+        }
+        if(empty($_POST['srcLink'])) {
+            $srcLinkBool = true;
+        }
+        if(!$titleBool && !$srcLinkBool) {
+            $title = $_POST['title'];
+            $srcLink = $_POST['srcLink'];
+            $image = $_POST['img'];
+            $description = $_POST['description'];
+    
+            $query = "INSERT INTO articles(id, title, srcLink, img, description) values(default, '$title', '$srcLink', '$image', '$description')";
+            pg_query($conn, $query);
+            if(isset($_SESSION['user'])) {
+                header("Location: home.php");
+            }else {
+                header("Location: index.php");
+            }
         }
     }
 
@@ -51,8 +62,10 @@
         <p>Made By students of IIT Ropar</p> 
     </div> -->
     
+    <!-- Header for Page -->
     <?php include "header.php"?>
     
+    <!-- Intro and Other Links -->
     <div class="container" style="margin-top:40px">
         <div class="row">
             <div class="col-sm-4" id="sidemenu">
@@ -76,8 +89,7 @@ eod;
                 <div class="fakeimgAboutme"></div>
                 <br>
                 <p>IIT Ropar is a leading Institute in agriculture related researches..</p>
-                <h3>Some Links</h3>
-                <p>Lorem ipsum dolor sit ame.</p>
+                <h3>Links</h3>
                 <ul class="nav nav-pills flex-column" id="linksIndexPage">
                     <li class="nav-item">
                         <?php
@@ -122,15 +134,40 @@ eod;
                 </ul>
                 <hr class="d-sm-none">
             </div>
+            <!-- Add Article form -->
             <div class="col-sm-8">
                 <h1>Add Article</h1>
                 <form method="post">
                     <div class="form-group">
-                        <label>Title</label>
+                    <?php
+                            $htmlCode1 = <<<eod
+                                <label>Title *</label>
+eod;
+                            $htmlCode2 = <<<eod
+                                <label style="color: red;">Title *</label>
+eod;
+                            if($srcLinkBool) {
+                                echo $htmlCode2;
+                            }else {
+                                echo  $htmlCode1;
+                            }
+                        ?>
                         <input type="text" name="title" class="form-control">
                     </div>    
                     <div class="form-group">
-                        <label>Source Link</label>
+                    <?php
+                            $htmlCode1 = <<<eod
+                                <label>Source Link *</label>
+eod;
+                            $htmlCode2 = <<<eod
+                                <label style="color: red;">Source Link *</label>
+eod;
+                            if($srcLinkBool) {
+                                echo $htmlCode2;
+                            }else {
+                                echo  $htmlCode1;
+                            }
+                        ?>
                         <input type="link" name="srcLink" class="form-control"/>
                     </div>
                     <div class="form-group">

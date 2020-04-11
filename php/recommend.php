@@ -76,8 +76,7 @@ eod;
                 <div class="fakeimgAboutme"></div>
                 <br>
                 <p>IIT Ropar is a leading Institute in agriculture related researches..</p>
-                <h3>Some Links</h3>
-                <p>Lorem ipsum dolor sit ame.</p>
+                <h3>Links</h3>
                 <ul class="nav nav-pills flex-column" id="linksIndexPage">
                     <li class="nav-item">
                         <?php

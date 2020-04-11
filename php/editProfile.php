@@ -70,8 +70,10 @@
         <p>Made By students of IIT Ropar</p> 
     </div> -->
     
+    <!-- Header for the page -->
     <?php include "header.php"?>
     
+    <!-- Intro and Links -->
     <div class="container" style="margin-top:40px">
         <div class="row">
             <div class="col-sm-4" id="sidemenu">
@@ -95,8 +97,7 @@ eod;
                 <div class="fakeimgAboutme"></div>
                 <br>
                 <p>IIT Ropar is a leading Institute in agriculture related researches..</p>
-                <h3>Some Links</h3>
-                <p>Lorem ipsum dolor sit ame.</p>
+                <h3>Links</h3>
                 <ul class="nav nav-pills flex-column" id="linksIndexPage">
                     <li class="nav-item">
                         <?php
@@ -133,6 +134,8 @@ eod;
                 </ul>
                 <hr class="d-sm-none">
             </div>
+
+            <!-- Edit Profile Options -->
             <div class="col-sm-8">
                 <h1>Edit Profile</h1>
                 <form method="post">
@@ -198,7 +201,7 @@ eod;
             </div>
         </div>
     </div>
-    
+
     <footer>
         <p>© IIT Ropar Agriculture Advisor</p>
     </footer>
