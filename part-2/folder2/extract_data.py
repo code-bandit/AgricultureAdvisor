@@ -4,7 +4,7 @@ import csv
 #Setting up connection to local graph database
 graph = Graph("bolt://localhost:7687", auth=('neo4j', 'saisantosh'))
 
-# Add uniqueness constraints.
+# Adding uniqueness constraints.
 graph.run("CREATE CONSTRAINT ON (c:Crop) ASSERT c.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (c:state) ASSERT c.name IS UNIQUE;")
 graph.run("CREATE CONSTRAINT ON (s:soiltype) ASSERT s.name IS UNIQUE;")
