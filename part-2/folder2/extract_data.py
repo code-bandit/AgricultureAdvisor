@@ -2,7 +2,7 @@ from py2neo import Graph
 import csv
 
 #Connection to graph database
-graph = Graph("bolt://localhost:7687", auth=('neo4j', 'saisantosh'))
+graph = Graph("bolt://localhost:7687", auth=('neo4j', 'abc'))
 
 # Adding uniqueness constraints.
 graph.run("CREATE CONSTRAINT ON (c:Crop) ASSERT c.name IS UNIQUE;")
